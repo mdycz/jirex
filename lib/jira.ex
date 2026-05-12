@@ -12,6 +12,12 @@ defmodule Jira do
   @spec get_issue(%Jira.Client{}, integer()) :: any()
   defdelegate get_issue(client, id), to: Issues
 
+  @spec list_issues_for_project(%Jira.Client{}, String.t() | integer(), keyword()) ::
+          {:ok, [map()]} | {:error, term()}
+  defdelegate list_issues_for_project(client, project_id, opts \\ []),
+    to: Issues,
+    as: :list_for_project
+
   @spec get_projects(%Jira.Client{}, integer()) :: any()
   defdelegate get_projects(client, page), to: Projects, as: :get_list
 
